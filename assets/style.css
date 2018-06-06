@@ -1,0 +1,106 @@
+html{
+    font-family: 'Aldrich', sans-serif;
+}
+.gameText2{
+    margin: auto;
+    width: 50%;
+    text-align:center;
+    color:white;
+    font-size:20px;
+}
+.gameText{
+    margin: auto;
+    width: 50%;
+    text-align:center;
+    color:white;
+    font-size:20px;
+    
+}
+.start-game{
+    visibility:visible;
+    margin:auto;
+}
+.difficulty-button{
+    visibility: hidden;
+}
+
+.instructions{
+    width:33%;
+    color:white;
+}
+.jumbotron.bg-primary.text-center{
+    background-color: green;
+    background-image: url("trivia_background.jpg");
+}
+.triviaContainer{
+  
+    background-color:lightblue;
+    padding:20px;
+    height:720px;
+    margin: 0 auto;
+    background-size:     cover;                     
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    border:3px solid blue;
+}
+.container-fluid{
+    min-height:100%;
+    margin:0px auto;
+}
+.current-answers{
+    margin: 15px auto;
+    border: 1px solid black;
+    width: 50%;
+    text-align:center;
+}
+.current-answers:hover{
+    background-color:green;
+    cursor: pointer;
+}
+body {
+    background-image: url("trivia_background.jpg");
+    min-height:100%;
+    font-family: 'Aldrich', sans-serif;
+       background-color: green;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: lightblue;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#myBtn{
+    border-radius: 12px;
+    background-color:white;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css"> 
+  <title>Trivia</title>
+
+
+</head>
+<body>
+  
+        <div class="jumbotron bg-primary text-center">
+           
+        </div>
+    
+    <div class = "container-fluid">
+        <div class="jumbotron triviaContainer">
+                <button id="myBtn" style = "float: right">Instructions</button>
+
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>This is the computer science and programming trivia game</p>
+                    <p>1) Click Start Game to start a new game.</p>
+                    <p>2) Choose your difficulty</p>
+                    <p>4) You will be asked 10 questions about the topic based on your difficulty</p>
+                    <p>5) You have 30 seconds to answer each question</p>
+                    <p>6) Your score will be displayed at the end indicating the number of correct and incorrect questions</p>
+                    <p>Good Luck!</p>
+                
+                  </div>
+                
+                </div>
+            <div class = "gameText" style="color:black">
+               
+                    <h1 style="color:black">Programmer Trivia</h1>
+                
+                    <button class ="start-game">Start Game</button>  
+                    <Br>
+                    <button class ="difficulty-button" id = "easy">Easy</button>
+                    <button class ="difficulty-button" id = "medium">Medium</button>
+                    <button class ="difficulty-button" id = "hard">Hard</button>
+                <h3>Time Remaining: <span id="time-remaining">30</span> Seconds</h3>
+                <div class = "question-div"> Current Question: <div id="question"></div></div>
+                <div class = "answer-div"></div>
+                <div class = "answer-text"></div>
+                <div class = "correct-answer-div"></div>
+            </div>
+            <div class = "gameText2">
+                </div>
+                
+      </div>
+            </div> 
+
+
+  <!-- Note that this div is now empty. We will fill it dynamically -->
+
+
+  <!-- JAVASCRIPT  -->
+  <!-- ========================================= -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/game.js"></script>
+</body>
+</html>
