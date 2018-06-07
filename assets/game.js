@@ -124,7 +124,8 @@ $(".start-game").on("click", function() {
     unanswered = 0;
     currentQuestionWin = 0;
     currentQuestionObject = 0;
-    intervalStart = 30;
+    //intervalStart = 30;
+    //$(timeRemaining).html(intervalStart);
     answerDiv.html("");
     questionDiv.html("");
     $(".answer-text").html("")
@@ -150,7 +151,6 @@ function difficulty(){
       }).done(function(response) {
 console.log(response);
 questionApi = response;
-console.log(questionApi.results[1]);
 for(var i = 0; i < questionArr.length; i++ ){
    console.log(questionApi.results[i].question)
    questionArr[i].question = questionApi.results[i].question;
@@ -177,7 +177,7 @@ function decrement() {
       //  Decrease number by one.
       intervalStart--;
 
-      //  Show the intervalStart in the #show-intervalStart tag.
+      //  Show the intervalStart.
       $(timeRemaining).html(intervalStart);
 
 
@@ -214,7 +214,7 @@ function shuffle(array) {
 
   return array;
 }
-
+//populates the answers with h3s and the questions/answers of the object passed in
 function populateAnswers(object){
     console.log(object);
     var currentQuestion = $("<h3>");    
@@ -225,13 +225,14 @@ function populateAnswers(object){
     var currentAnswer4 = $("<h3>");
     var currentAnswerH3Arr = [currentAnswer1, currentAnswer2, currentAnswer3, currentAnswer4];
     shuffleAnswerArr = [object.answer1, object.answer2, object.answer3, object.correctAnswer];
+    //shuffles questions
     shuffleAnswerArr = shuffle(shuffleAnswerArr);
     console.log(shuffleAnswerArr);
+    //displays questions
     currentQuestion.html(object.question);
     questionDiv.html(currentQuestion);
-
+//adds IDs and classes to each of the answers so we can identify the correct one even when theyre shuffled
     for(var i = 0; i < currentAnswerH3Arr.length; i++){
-        console.log("wut");
         currentAnswerH3Arr[i].addClass("current-answers");
         currentAnswerH3Arr[i].attr("id", shuffleAnswerArr[i]);
         currentAnswerH3Arr[i].html(shuffleAnswerArr[i]);
@@ -263,6 +264,8 @@ $(answerDiv).on("click", ".current-answers", function() {
         });
 
 function questionIterator(x){
+    intervalStart = 30;
+$(timeRemaining).html(intervalStart);
     if (x < questionArr.length){
         $(".answer-text").html("")
         $(".correct-answer-div").html("")
@@ -285,23 +288,23 @@ function checkWin(){
     stop();
 
 if (intervalStart == 0){
-$(".answer-text").html("Bummer, you ran out of time, the answer was: ")
-$(".correct-answer-div").html(questionArr[currentQuestionObject].correctAnswer)
+$(".answer-text").html(" <h3> Bummer, you ran out of time, the answer was:  </h3>")
+$(".correct-answer-div").html("<h3>"+ questionArr[currentQuestionObject].correctAnswer+ "</h3>")
 unanswered++;
 answerDiv.html("");
 $(".current-answers").html("");
 } 
 
 if (intervalStart > 0 && currentQuestionWin === true){
-$(".answer-text").html("Congrats, you guessed correctly, the answer was: ")
-$(".correct-answer-div").html(questionArr[currentQuestionObject].correctAnswer)
+$(".answer-text").html("<h3>Congrats, you guessed correctly, the answer was: </h3>")
+$(".correct-answer-div").html("<h3>" + questionArr[currentQuestionObject].correctAnswer + "</h3>")
 wins++;
 answerDiv.html("");
 $(".current-answers").html("");
 
 }
 if ((intervalStart > 0 && currentQuestionWin === false)){
-$(".answer-text").html("Sorry, you guessed incorrectly, the answer was: ")
+$(".answer-text").html("<h3> Sorry, you guessed incorrectly, the answer was:  <\h3>")
 $(".correct-answer-div").html(questionArr[currentQuestionObject].correctAnswer)
 losses++;
 answerDiv.html("");
@@ -309,6 +312,7 @@ $(".current-answers").html("");
 
 
 }
+
 currentQuestionObject++;
 setTimeout(questionIterator, 1000, currentQuestionObject);
 
