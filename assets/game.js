@@ -41,6 +41,7 @@ $(".start-game").on("click", function() {
     unanswered = 0;
     currentQuestionWin = 0;
     currentQuestionObject = 0;
+    questionArr = [];
     //intervalStart = 30;
     //$(timeRemaining).html(intervalStart);
     answerDiv.html("");
