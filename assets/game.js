@@ -126,13 +126,16 @@ $(".start-game").on("click", function() {
     currentQuestionObject = 0;
     intervalStart = 30;
     answerDiv.html("");
+    questionDiv.html("");
+    $(".answer-text").html("")
+    $(".correct-answer-div").html("")
     $(".start-game").css({"visibility": "hidden"});
     $(".question-div").css({"visibility": "visible"});
     $(".difficulty-button").css({"visibility": "visible"});      
 });
 
 $(".difficulty-button").on("click", function() {
-
+console.log("test")
 difficulty();      
 });
 function difficulty(){
