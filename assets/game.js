@@ -70,7 +70,7 @@ var question10 = {
     answer2: "",
     answer3: "",
 }
-var difficulty;
+var gameDifficulty;
 var questionArr = [question1, question2, question3, question4, question5, question6, question7]
 //var queryURL = "https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple";
 
@@ -135,14 +135,15 @@ $(".start-game").on("click", function() {
 });
 
 $(".difficulty-button").on("click", function() {
+$(".difficulty-button").css({"visibility": "hidden"});  
 console.log("test")
 difficulty();      
 });
 function difficulty(){
 
- difficulty = ($(this).attr("id"));
+ gameDifficulty = ($(this).attr("id"));
 
- var queryURL = "https://opentdb.com/api.php?amount=10&category=18&" + difficulty + "=medium&type=multiple";
+ var queryURL = "https://opentdb.com/api.php?amount=10&category=18&" + gameDifficulty + "=medium&type=multiple";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -158,7 +159,6 @@ for(var i = 0; i < questionArr.length; i++ ){
    questionArr[i].answer2 = questionApi.results[i].incorrect_answers[1];
    questionArr[i].answer3 = questionApi.results[i].incorrect_answers[2];
 }
-$(".difficulty-button").css({"visibility": "hidden"});  
 questionIterator(currentQuestionObject); 
 });
       
