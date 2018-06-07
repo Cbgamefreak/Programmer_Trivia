@@ -19,9 +19,13 @@ html{
 .start-game{
     visibility:visible;
     margin:auto;
+    border-radius: 12px;
+    background-color:white;
 }
 .difficulty-button{
     visibility: hidden;
+    border-radius: 12px;
+    background-color:white;
 }
 
 .instructions{

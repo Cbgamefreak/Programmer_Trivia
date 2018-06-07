@@ -1,84 +1,8 @@
-
-var questionApi;
-var question1 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question2 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question3 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question4 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question5 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question6 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question7 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question8 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question9 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var question10 = {
-    question: "",
-    correctAnswer: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-}
-var gameDifficulty;
-var questionArr = [question1, question2, question3, question4, question5, question6, question7]
 //var queryURL = "https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple";
-
-       // Creates AJAX call for the specific movie button being clicked
-
-
-
-
+//this program uses the above api key, which is free and open to the public, credit to opentdb.com
+var questionApi;
+var gameDifficulty;
+var questionArr = []
 var questionDiv = $("#question");
 var answerDiv = $(".answer-div");
 var timeRemaining = $("#time-remaining");
@@ -88,30 +12,23 @@ var intervalId;
 var currentQuestionWin = false;
 var currentQuestionObject = 0;
 var intervalStart = 30;
-
 var wins = 0;
 var losses = 0;
 var unanswered = 0;
-
 // Get the modal
 var modal = document.getElementById("myModal");
-
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     modal.style.display = "block";
 }
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
 }
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -136,31 +53,28 @@ $(".start-game").on("click", function() {
 });
 
 $(".difficulty-button").on("click", function() {
-$(".difficulty-button").css({"visibility": "hidden"});  
-console.log("test")
-difficulty();      
+    $(".difficulty-button").css({"visibility": "hidden"});  
+    console.log("test")
+    difficulty();      
 });
+
+
 function difficulty(){
 
- gameDifficulty = ($(this).attr("id"));
-
- var queryURL = "https://opentdb.com/api.php?amount=10&category=18&" + gameDifficulty + "=medium&type=multiple";
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).done(function(response) {
-console.log(response);
-questionApi = response;
-for(var i = 0; i < questionArr.length; i++ ){
-   console.log(questionApi.results[i].question)
-   questionArr[i].question = questionApi.results[i].question;
-   questionArr[i].correctAnswer = questionApi.results[i].correct_answer;
-   questionArr[i].answer1 = questionApi.results[i].incorrect_answers[0];
-   questionArr[i].answer2 = questionApi.results[i].incorrect_answers[1];
-   questionArr[i].answer3 = questionApi.results[i].incorrect_answers[2];
-}
-questionIterator(currentQuestionObject); 
-});
+    gameDifficulty = ($(this).attr("id"));
+    var queryURL = "https://opentdb.com/api.php?amount=10&category=18&" + gameDifficulty + "=medium&type=multiple";
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).done(function(response) {
+    console.log(response);
+    questionApi = response;
+    for(var i = 0; i < questionApi.results.length; i++ ){
+        questionArr.push(questionApi.results[i]);
+    }
+    console.log(questionArr);
+    questionIterator(currentQuestionObject); 
+    });
       
 }
 
@@ -192,10 +106,10 @@ function decrement() {
     //  The stop function
 function stop() {
       //  Clears our intervalId
-      //  We just pass the name of the interval
-      //  to the clearInterval function.
       clearInterval(intervalId);
     }
+
+
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -224,7 +138,7 @@ function populateAnswers(object){
     var currentAnswer3 = $("<h3>");
     var currentAnswer4 = $("<h3>");
     var currentAnswerH3Arr = [currentAnswer1, currentAnswer2, currentAnswer3, currentAnswer4];
-    shuffleAnswerArr = [object.answer1, object.answer2, object.answer3, object.correctAnswer];
+    shuffleAnswerArr = [object.incorrect_answers[0], object.incorrect_answers[1], object.incorrect_answers[2], object.correct_answer];
     //shuffles questions
     shuffleAnswerArr = shuffle(shuffleAnswerArr);
     console.log(shuffleAnswerArr);
@@ -244,16 +158,16 @@ function populateAnswers(object){
 }
 
 $(answerDiv).on("click", ".current-answers", function() {
-        
-        if (questionArr[currentQuestionObject].correctAnswer==($(this).attr("id"))){
+        //checks if the answer was correct
+        if (questionArr[currentQuestionObject].correct_answer==($(this).attr("id"))){
         currentQuestionWin = true;
         console.log("win");
         console.log($(this).attr("id"));
             checkWin();
             
         }
-
-        else if (questionArr[currentQuestionObject].correctAnswer!==($(this).attr("id"))){
+//or incorrect
+        else if (questionArr[currentQuestionObject].correct_answer!==($(this).attr("id"))){
             currentQuestionWin = false;
             checkWin();
             console.log($(this).attr("id"));
@@ -262,15 +176,16 @@ $(answerDiv).on("click", ".current-answers", function() {
         }
 
         });
-
+//interates through the questions using currentQuestionObject counter
 function questionIterator(x){
     intervalStart = 30;
-$(timeRemaining).html(intervalStart);
+    $(timeRemaining).html(intervalStart);
     if (x < questionArr.length){
         $(".answer-text").html("")
         $(".correct-answer-div").html("")
         populateAnswers(questionArr[x])
     }
+    //this is the game over condition
     else{
         $(".question-div").css({"visibility": "hidden"});
         answerDiv.html("<h1>Game Over<h1>")
@@ -281,39 +196,40 @@ $(timeRemaining).html(intervalStart);
        $(".start-game").css({"visibility": "visible"});
     }
 }
-
+//checks to see which outcome has currently occured for the user
 function checkWin(){
     
     console.log(currentQuestionObject);
     stop();
+//outcome when the inverval = 0
+    if (intervalStart == 0){
+        $(".answer-text").html(" <h3> Bummer, you ran out of time, the answer was:  </h3>")
+        $(".correct-answer-div").html("<h3>"+ questionArr[currentQuestionObject].correct_answer+ "</h3>")
+        unanswered++;
+        answerDiv.html("");
+        $(".current-answers").html("");
+    } 
+//outcome when the question was guess correctly
+    if (intervalStart > 0 && currentQuestionWin === true){
+        $(".answer-text").html("<h3>Congrats, you guessed correctly, the answer was: </h3>")
+        $(".correct-answer-div").html("<h3>" + questionArr[currentQuestionObject].correct_answer + "</h3>")
+        wins++;
+        answerDiv.html("");
+        $(".current-answers").html("");
 
-if (intervalStart == 0){
-$(".answer-text").html(" <h3> Bummer, you ran out of time, the answer was:  </h3>")
-$(".correct-answer-div").html("<h3>"+ questionArr[currentQuestionObject].correctAnswer+ "</h3>")
-unanswered++;
-answerDiv.html("");
-$(".current-answers").html("");
-} 
-
-if (intervalStart > 0 && currentQuestionWin === true){
-$(".answer-text").html("<h3>Congrats, you guessed correctly, the answer was: </h3>")
-$(".correct-answer-div").html("<h3>" + questionArr[currentQuestionObject].correctAnswer + "</h3>")
-wins++;
-answerDiv.html("");
-$(".current-answers").html("");
-
-}
-if ((intervalStart > 0 && currentQuestionWin === false)){
-$(".answer-text").html("<h3> Sorry, you guessed incorrectly, the answer was:  <\h3>")
-$(".correct-answer-div").html(questionArr[currentQuestionObject].correctAnswer)
-losses++;
-answerDiv.html("");
-$(".current-answers").html("");
+    }
+    //outcome when the questionw as guessed incorrectly
+        if ((intervalStart > 0 && currentQuestionWin === false)){
+        $(".answer-text").html("<h3> Sorry, you guessed incorrectly, the answer was:  <\h3>")
+        $(".correct-answer-div").html(questionArr[currentQuestionObject].correct_answer)
+        losses++;
+        answerDiv.html("");
+        $(".current-answers").html("");
 
 
-}
-
-currentQuestionObject++;
-setTimeout(questionIterator, 1000, currentQuestionObject);
+    }
+//iterates through quetions with a timeout between each question
+    currentQuestionObject++;
+    setTimeout(questionIterator, 1000, currentQuestionObject);
 
 }
