@@ -231,6 +231,6 @@ function checkWin(){
     }
 //iterates through quetions with a timeout between each question
     currentQuestionObject++;
-    setTimeout(questionIterator, 1000, currentQuestionObject);
+    setTimeout(questionIterator, 5000, currentQuestionObject);
 
 }
