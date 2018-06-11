@@ -221,8 +221,8 @@ function checkWin(){
     }
     //outcome when the questionw as guessed incorrectly
         if ((intervalStart > 0 && currentQuestionWin === false)){
-        $(".answer-text").html("<h3> Sorry, you guessed incorrectly, the answer was:  <\h3>")
-        $(".correct-answer-div").html(questionArr[currentQuestionObject].correct_answer)
+        $(".answer-text").html("<h3> Sorry, you guessed incorrectly, the answer was:  </h3>")
+        $(".correct-answer-div").html("<h3>" + questionArr[currentQuestionObject].correct_answer + "</h3>")
         losses++;
         answerDiv.html("");
         $(".current-answers").html("");
